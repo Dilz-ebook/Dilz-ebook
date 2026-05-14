@@ -160,31 +160,81 @@ def generate_queue():
     teaser_hooks = parse_thread_teaser_hooks()
     print(f"  thread-teaser.md: {len(teaser_hooks)} teaser hooks")
     
-    # Build queue: alternate between types for variety
-    # Strategy: caption → hook → caption → hook → teaser → repeat
+    # Separate posts with link vs without link
+    all_posts = hooks + captions + teaser_hooks
+    posts_with_link = [p for p in all_posts if LYNKID_URL in inject_link(p["text"])]
+    posts_without_link = [p for p in all_posts if LYNKID_URL not in inject_link(p["text"])]
+    
+    print(f"  Posts with link: {len(posts_with_link)}")
+    print(f"  Posts without link: {len(posts_without_link)}")
+    
+    # Build queue: 3 posts per day
+    # Rule: minimal 1, maksimal 2 link per hari
+    # With 26 link posts and 38 no-link posts = 64 total = ~21 days
+    # 26 links / 21 days = ~1.2 per day → mostly 1, sometimes 2
     queue = []
-    h_idx, c_idx, t_idx = 0, 0, 0
+    link_idx = 0
+    no_link_idx = 0
+    day = 0
     
-    while h_idx < len(hooks) or c_idx < len(captions) or t_idx < len(teaser_hooks):
-        # Add a caption
-        if c_idx < len(captions):
-            queue.append(captions[c_idx])
-            c_idx += 1
+    while link_idx < len(posts_with_link) or no_link_idx < len(posts_without_link):
+        day += 1
+        day_posts = []
         
-        # Add a hook
-        if h_idx < len(hooks):
-            queue.append(hooks[h_idx])
-            h_idx += 1
+        # Calculate: should this day have 1 or 2 links?
+        remaining_links = len(posts_with_link) - link_idx
+        remaining_no_links = len(posts_without_link) - no_link_idx
+        remaining_days = max(1, (remaining_links + remaining_no_links + 2) // 3)
         
-        # Add a teaser hook every 5 items
-        if t_idx < len(teaser_hooks) and len(queue) % 5 == 0:
-            queue.append(teaser_hooks[t_idx])
-            t_idx += 1
-    
-    # Add remaining teaser hooks
-    while t_idx < len(teaser_hooks):
-        queue.append(teaser_hooks[t_idx])
-        t_idx += 1
+        # If we have enough links for 2 per day for remaining days, use 2
+        # Otherwise use 1 to spread them out
+        links_today = 2 if remaining_links > remaining_days else 1
+        # But max 2
+        links_today = min(links_today, 2, remaining_links)
+        # Ensure at least 1 if available
+        links_today = max(links_today, min(1, remaining_links))
+        
+        no_links_today = 3 - links_today
+        
+        # Build day: start with no-link, then link in middle/end (more natural)
+        # Pattern: no-link first, then links
+        added_no_link = 0
+        added_link = 0
+        
+        # First slot: no-link (if available)
+        if added_no_link < no_links_today and no_link_idx < len(posts_without_link):
+            day_posts.append(posts_without_link[no_link_idx])
+            no_link_idx += 1
+            added_no_link += 1
+        elif link_idx < len(posts_with_link):
+            day_posts.append(posts_with_link[link_idx])
+            link_idx += 1
+            added_link += 1
+        
+        # Second slot: link (if needed) or no-link
+        if added_link < links_today and link_idx < len(posts_with_link):
+            day_posts.append(posts_with_link[link_idx])
+            link_idx += 1
+            added_link += 1
+        elif no_link_idx < len(posts_without_link):
+            day_posts.append(posts_without_link[no_link_idx])
+            no_link_idx += 1
+            added_no_link += 1
+        
+        # Third slot: fill remaining
+        if added_link < links_today and link_idx < len(posts_with_link):
+            day_posts.append(posts_with_link[link_idx])
+            link_idx += 1
+            added_link += 1
+        elif no_link_idx < len(posts_without_link):
+            day_posts.append(posts_without_link[no_link_idx])
+            no_link_idx += 1
+            added_no_link += 1
+        
+        if not day_posts:
+            break
+        
+        queue.extend(day_posts)
     
     # Inject Lynk.id link into all posts
     for item in queue:
