@@ -4,6 +4,8 @@ on:
   schedule:
     # Jam 07:00 WIB (00:00 UTC) - Posting Pagi
     - cron: '0 0 * * *'
+    # Jam 12:00 WIB (05:00 UTC) - Posting Siang
+    - cron: '0 5 * * *'
     # Jam 19:00 WIB (12:00 UTC) - Posting Malam
     - cron: '0 12 * * *'
   
