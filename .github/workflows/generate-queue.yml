@@ -1,0 +1,39 @@
+name: Regenerate Content Queue
+
+on:
+  # Trigger when marketing files change
+  push:
+    paths:
+      - 'marketing/**'
+  
+  # Manual trigger
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  regenerate-queue:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Generate content queue
+        run: python autopost/generate_queue.py
+
+      - name: Commit updated queue
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add autopost/content_queue.json autopost/x_export.txt
+          git diff --staged --quiet || git commit -m "chore: regenerate content queue [skip ci]"
+          git push

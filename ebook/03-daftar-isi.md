@@ -20,7 +20,7 @@
 | 13. | CTA Halus                                 | 17  |
 | 14. | Hook Random                               | 18  |
 | 15. | Ajak Interaksi Akhir                      | 19  |
-| 16. | **BONUS** 50+ Hook Random                 | 20  |
+| 16. | **BONUS** 55 Hook Random                  | 20  |
 | —   | Penutup                                   | 22  |
 
 ---

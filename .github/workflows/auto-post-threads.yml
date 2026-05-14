@@ -1,0 +1,54 @@
+name: Auto Post to Threads
+
+on:
+  schedule:
+    # Jam 07:00 WIB (00:00 UTC) - Posting Pagi
+    - cron: '0 0 * * *'
+    # Jam 12:00 WIB (05:00 UTC) - Posting Siang
+    - cron: '0 5 * * *'
+    # Jam 19:00 WIB (12:00 UTC) - Posting Malam
+    - cron: '0 12 * * *'
+  
+  # Manual trigger (untuk testing atau posting darurat)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  post-to-threads:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r autopost/requirements.txt
+
+      - name: Generate content queue (if not exists)
+        run: |
+          if [ ! -f autopost/content_queue.json ]; then
+            python autopost/generate_queue.py
+          fi
+
+      - name: Post to Threads
+        env:
+          THREADS_USER_ID: ${{ secrets.THREADS_USER_ID }}
+          THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+        run: python autopost/post_threads.py
+
+      - name: Commit updated tracker
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add autopost/tracker.json
+          git diff --staged --quiet || git commit -m "chore: update post tracker [skip ci]"
+          git push
