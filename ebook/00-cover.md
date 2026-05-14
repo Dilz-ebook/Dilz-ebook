@@ -25,7 +25,7 @@
 
 ---
 
-## BONUS 50+ HOOK RANDOM
+## BONUS 55 HOOK RANDOM
 
 Untuk inspirasi tambahan setiap hari!
 

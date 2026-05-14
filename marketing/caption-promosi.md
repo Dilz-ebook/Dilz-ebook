@@ -151,8 +151,8 @@ Yang udah notify kamu boleh, biar dapet duluan.
 Harga launching: Rp 25.000 (normal Rp 99.000)
 
 Yang dapet pertama:
-✓ 200+ template hook (15 kategori)
-✓ BONUS 55+ hook random
+✓ 250+ template hook (16 kategori)
+✓ BONUS 55 hook random
 ✓ Anatomi hook + tips posting
 ✓ Format PDF mobile-friendly
 
@@ -166,7 +166,7 @@ Link di bio. Yuk buruan.
 Bayangin punya:
 
 ✓ 8 bulan stok hook untuk posting harian
-✓ 15 kategori sesuai mood / tujuan kontenmu
+✓ 16 kategori sesuai mood / tujuan kontenmu
 ✓ Hook yang udah dikurasi (bukan asal banyak)
 ✓ Format siap copy-paste, gak perlu mikir lagi
 
@@ -221,7 +221,7 @@ Buat kalian yang udah jadi konten kreator:
 
 Tau kan rasanya pas mau posting harian, tapi kepala kosong?
 
-Gak perlu lagi. Ebook ini punya 15 kategori untuk 15 jenis konten beda.
+Gak perlu lagi. Ebook ini punya 16 kategori untuk 16 jenis konten beda.
 
 Bingung pilih yang mana? Pakai jadwal mingguan yang aku siapin di dalam.
 
@@ -236,7 +236,7 @@ Jualan organik di Threads/IG = jualan tanpa keliatan jualan.
 
 Caranya? Pakai hook "Selling Trigger" yang aku susun di ebook.
 
-13 template selling trigger + 200+ hook lain untuk warming up audiens kamu.
+13 template selling trigger + 230+ hook lain untuk warming up audiens kamu.
 
 Rp 25.000. [link]
 ```
@@ -342,7 +342,7 @@ Kalo itu kamu, ebook ini buat kamu. Rp 25.000.
 ```
 Kalo kamu beli hari ini, kamu juga dapet:
 
-🎁 BONUS 55+ Hook Random (untuk hari yang lagi mentok ide)
+🎁 BONUS 55 Hook Random (untuk hari yang lagi mentok ide)
 🎁 Anatomi hook yang convert
 🎁 Jadwal posting 7 hari (kategori per hari)
 🎁 Tips konsisten tanpa burnout
@@ -401,7 +401,7 @@ Kalo kamu udah scroll utas ini sampe sini, artinya kamu tertarik. Jangan biarin 
 ```
 Harga normal udah balik: Rp 99.000.
 
-Tapi tetep, ada 250+ hook + bonus 55+ hook + tips lengkap di sini.
+Tapi tetep, ada 250+ hook + bonus 55 hook + tips lengkap di sini.
 
 Worth it untuk kamu yang serius mau bangun konten/personal branding/bisnis di sosmed.
 

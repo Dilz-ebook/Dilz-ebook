@@ -28,6 +28,6 @@
 
 12. Lebih nyebelin mana: notif WA grup keluarga jam 5 pagi, atau notif tagihan jam 11 malem?
 
-13. Jujur dong, kalian biasa bilang "lagi nyari jati diri" itu beneran ada dasarnya, otau cuma alesan biar gak kerja?
+13. Jujur dong, kalian biasa bilang "lagi nyari jati diri" itu beneran ada dasarnya, atau cuma alesan biar gak kerja?
 
 14. Kalo bisa kirim 1 pesan ke versi kalian 5 tahun lalu, kalian bakal bilang apa? (Maks 7 kata, biar challenge.)

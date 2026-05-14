@@ -33,8 +33,8 @@ Di dalam ebook ini ada **250+ template hook** yang udah disusun per kategori. Ti
 
 **Apa yang bakal kamu dapet:**
 
-- ✅ 200+ template hook utas (16 kategori)
-- ✅ BONUS 50+ hook random untuk inspirasi harian
+- ✅ 250+ template hook utas (16 kategori)
+- ✅ BONUS 55 hook random untuk inspirasi harian
 - ✅ Penjelasan singkat anatomi hook yang convert
 - ✅ Tips kapan & gimana cara pakainya
 - ✅ Format siap copy-paste, tinggal sesuaikan topik

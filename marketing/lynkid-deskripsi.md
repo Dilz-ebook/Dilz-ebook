@@ -49,8 +49,8 @@ Cocok buat:
 
 📦 ISI EBOOK
 
-✓ 200+ template hook utas (15 kategori)
-✓ BONUS 55+ hook random untuk inspirasi harian
+✓ 250+ template hook utas (16 kategori)
+✓ BONUS 55 hook random untuk inspirasi harian
 ✓ Penjelasan anatomi hook yang bikin viral
 ✓ Cara pakai per kategori + jadwal posting 7 hari
 ✓ Format PDF rapi, ringan, mobile-friendly
