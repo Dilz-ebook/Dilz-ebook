@@ -1,5 +1,5 @@
 {
-  "threads_index": 1,
+  "threads_index": 2,
   "x_index": 0,
   "posted": [
     {
@@ -8,6 +8,13 @@
       "post_id": "18585217012054612",
       "category": "caption-promosi",
       "timestamp": "2026-05-14 09:02:27 UTC"
+    },
+    {
+      "platform": "threads",
+      "index": 1,
+      "post_id": "workflow-run-2",
+      "category": "caption-promosi",
+      "timestamp": "2026-05-14 09:10:00 UTC"
     }
   ]
 }
