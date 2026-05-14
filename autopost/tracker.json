@@ -1,5 +1,13 @@
 {
-  "threads_index": 0,
+  "threads_index": 1,
   "x_index": 0,
-  "posted": []
+  "posted": [
+    {
+      "platform": "threads",
+      "index": 0,
+      "post_id": "18088629494028580",
+      "category": "caption-promosi",
+      "timestamp": "2026-05-14 09:06:50 UTC"
+    }
+  ]
 }
