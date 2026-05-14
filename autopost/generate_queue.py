@@ -19,6 +19,9 @@ MARKETING_DIR = Path(__file__).parent.parent / "marketing"
 OUTPUT_FILE = Path(__file__).parent / "content_queue.json"
 X_EXPORT_FILE = Path(__file__).parent / "x_export.txt"
 
+# Link produk Lynk.id
+LYNKID_URL = "https://lynk.id/pinokioarab/mjz191d8871v"
+
 
 def parse_hook_viral_promo():
     """Parse hook-viral-promo.md for single-post hooks."""
@@ -101,9 +104,52 @@ def parse_thread_teaser_hooks():
     return hooks
 
 
+def inject_link(text):
+    """
+    Replace all [link] placeholders and 'link/cek/klik di bio' mentions
+    with the actual Lynk.id product URL.
+    """
+    # Replace [link] placeholder
+    text = text.replace("[link]", LYNKID_URL)
+    
+    # Replace variations of "link di bio", "cek bio", "klik di bio" etc.
+    # Match full phrases including trailing punctuation/words
+    bio_replacements = [
+        (r'Klik di bio buat checkout\.?', f'Grab di sini: {LYNKID_URL}'),
+        (r'Klik di bio kalo siap\.?', f'Grab di sini: {LYNKID_URL}'),
+        (r'Klik di bio sebelum kelewat\.?', f'Grab sekarang: {LYNKID_URL}'),
+        (r'Klik di bio\.?', f'Grab di sini: {LYNKID_URL}'),
+        (r'Cek bio sekarang\.?', f'Grab: {LYNKID_URL}'),
+        (r'Cek bio kalo penasaran\.?', f'Cek di sini: {LYNKID_URL}'),
+        (r'Cek bio\.?', f'Cek: {LYNKID_URL}'),
+        (r'Link di bio\.?', LYNKID_URL),
+        (r'link di bio\.?', LYNKID_URL),
+    ]
+    
+    # Only inject bio link if post doesn't already contain the URL
+    if LYNKID_URL not in text:
+        for pattern, replacement in bio_replacements:
+            if re.search(pattern, text):
+                text = re.sub(pattern, replacement, text)
+                break  # Only replace first match to avoid duplicates
+    else:
+        # URL already present from [link] replacement, just remove leftover "bio" refs
+        for pattern, _ in bio_replacements:
+            text = re.sub(pattern, '', text)
+    
+    # Clean up double newlines, trailing spaces, leading spaces on lines
+    text = re.sub(r' +\n', '\n', text)
+    text = re.sub(r'\n +', '\n', text)
+    text = re.sub(r'\n{3,}', '\n\n', text)
+    text = text.strip()
+    
+    return text
+
+
 def generate_queue():
     """Generate the full content queue, mixed for variety."""
     print("Parsing marketing files...")
+    print(f"  Lynk.id URL: {LYNKID_URL}")
     
     hooks = parse_hook_viral_promo()
     print(f"  hook-viral-promo.md: {len(hooks)} hooks")
@@ -139,6 +185,10 @@ def generate_queue():
     while t_idx < len(teaser_hooks):
         queue.append(teaser_hooks[t_idx])
         t_idx += 1
+    
+    # Inject Lynk.id link into all posts
+    for item in queue:
+        item["text"] = inject_link(item["text"])
     
     print(f"\nTotal queue: {len(queue)} posts")
     
