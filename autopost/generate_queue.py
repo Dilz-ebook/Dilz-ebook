@@ -236,9 +236,12 @@ def generate_queue():
         
         queue.extend(day_posts)
     
-    # Inject Lynk.id link into all posts
+    # Inject Lynk.id link and clean up hashtags
     for item in queue:
         item["text"] = inject_link(item["text"])
+        # Remove #PinokioArab (Threads treats it as group tag)
+        item["text"] = re.sub(r'\n*#PinokioArab\n*', '', item["text"], flags=re.IGNORECASE)
+        item["text"] = item["text"].strip()
     
     print(f"\nTotal queue: {len(queue)} posts")
     
