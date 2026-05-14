@@ -58,22 +58,34 @@ def create_threads_container(text):
         text = text[:497] + "..."
     
     url = f"{GRAPH_API_BASE}/{THREADS_USER_ID}/threads"
+    
+    # Use params for access_token and JSON-like form for text
+    # This avoids encoding issues with special characters
+    params = {
+        "access_token": THREADS_ACCESS_TOKEN,
+    }
     payload = {
         "media_type": "TEXT",
         "text": text,
-        "access_token": THREADS_ACCESS_TOKEN,
     }
     print(f"POST {url}")
     print(f"Text length: {len(text)} chars")
-    response = requests.post(url, data=payload)
     
-    # Log response for debugging
-    print(f"Status: {response.status_code}")
-    print(f"Response body: {response.text}")
-    
-    response.raise_for_status()
-    data = response.json()
-    return data["id"]
+    try:
+        response = requests.post(url, params=params, data=payload)
+        
+        # Log response for debugging
+        print(f"Status: {response.status_code}")
+        print(f"Response body: {response.text}")
+        
+        response.raise_for_status()
+        data = response.json()
+        return data["id"]
+    except requests.exceptions.RequestException as e:
+        print(f"Request failed: {e}")
+        if hasattr(e, 'response') and e.response is not None:
+            print(f"Error response: {e.response.text}")
+        raise
 
 
 def publish_threads_container(container_id):
@@ -82,11 +94,17 @@ def publish_threads_container(container_id):
     Returns the published post ID.
     """
     url = f"{GRAPH_API_BASE}/{THREADS_USER_ID}/threads_publish"
-    payload = {
-        "creation_id": container_id,
+    params = {
         "access_token": THREADS_ACCESS_TOKEN,
     }
-    response = requests.post(url, data=payload)
+    payload = {
+        "creation_id": container_id,
+    }
+    response = requests.post(url, params=params, data=payload)
+    
+    print(f"Publish status: {response.status_code}")
+    print(f"Publish response: {response.text}")
+    
     response.raise_for_status()
     data = response.json()
     return data["id"]
