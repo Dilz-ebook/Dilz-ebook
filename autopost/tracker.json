@@ -1,5 +1,5 @@
 {
-  "threads_index": 58,
+  "threads_index": 59,
   "x_index": 0,
   "posted": [
     {
@@ -407,6 +407,13 @@
       "post_id": "17890786002535811",
       "category": "thread-teaser-hook",
       "timestamp": "2026-06-02 02:58:39 UTC"
+    },
+    {
+      "platform": "threads",
+      "index": 58,
+      "post_id": "17891180295507243",
+      "category": "caption-promosi",
+      "timestamp": "2026-06-02 09:03:09 UTC"
     }
   ]
 }
