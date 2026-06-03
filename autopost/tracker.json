@@ -1,5 +1,5 @@
 {
-  "threads_index": 60,
+  "threads_index": 61,
   "x_index": 0,
   "posted": [
     {
@@ -421,6 +421,13 @@
       "post_id": "17975027417882851",
       "category": "thread-teaser-hook",
       "timestamp": "2026-06-02 16:06:22 UTC"
+    },
+    {
+      "platform": "threads",
+      "index": 60,
+      "post_id": "18009252539863744",
+      "category": "thread-teaser-hook",
+      "timestamp": "2026-06-03 03:33:53 UTC"
     }
   ]
 }
