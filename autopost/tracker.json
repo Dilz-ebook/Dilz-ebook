@@ -1,5 +1,5 @@
 {
-  "threads_index": 55,
+  "threads_index": 56,
   "x_index": 0,
   "posted": [
     {
@@ -834,6 +834,13 @@
       "post_id": "18077746787307322",
       "category": "caption-promosi",
       "timestamp": "2026-06-22 16:40:36 UTC"
+    },
+    {
+      "platform": "threads",
+      "index": 55,
+      "post_id": "18156695431464556",
+      "category": "caption-promosi",
+      "timestamp": "2026-06-23 02:42:30 UTC"
     }
   ]
 }
