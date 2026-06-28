@@ -1,5 +1,5 @@
 {
-  "threads_index": 6,
+  "threads_index": 7,
   "x_index": 0,
   "posted": [
     {
@@ -939,6 +939,13 @@
       "post_id": "18327927589253590",
       "category": "hook-viral-promo",
       "timestamp": "2026-06-27 13:15:43 UTC"
+    },
+    {
+      "platform": "threads",
+      "index": 6,
+      "post_id": "18006812000930494",
+      "category": "hook-viral-promo",
+      "timestamp": "2026-06-28 02:53:00 UTC"
     }
   ]
 }
