@@ -29,18 +29,24 @@ def parse_hook_viral_promo():
     content = filepath.read_text(encoding="utf-8")
     hooks = []
     
-    # Find numbered hooks (1. text, 2. text, etc.)
-    pattern = r'^\d+\.\s+(.+)$'
-    matches = re.findall(pattern, content, re.MULTILINE)
+    # Split content by double newlines to isolate each hook block
+    blocks = content.split("\n\n")
     
-    for match in matches:
-        text = match.strip()
-        if text and len(text) > 20 and not text.startswith("|") and not text.startswith("Hook"):
-            hooks.append({
-                "text": text,
-                "category": "organik-viral-hook",
-                "type": "single_post",
-            })
+    for block in blocks:
+        block = block.strip()
+        if not block:
+            continue
+            
+        # Match starting with number like "1. " or "12. "
+        match = re.match(r'^\d+\.\s+(.+)$', block, re.DOTALL)
+        if match:
+            text = match.group(1).strip()
+            if text and len(text) > 20 and not text.startswith("|") and not text.startswith("Hook"):
+                hooks.append({
+                    "text": text,
+                    "category": "organik-viral-hook",
+                    "type": "single_post",
+                })
     
     return hooks
 

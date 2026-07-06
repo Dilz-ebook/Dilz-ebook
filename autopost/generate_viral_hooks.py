@@ -67,15 +67,10 @@ def get_next_hook_number():
 
 def mock_paraphrase(viral_text, index):
     """Simulate an organic copywriting tip hook for offline testing."""
-    first_line = viral_text.split("\n")[0]
-    if len(first_line) > 50:
-        first_line = first_line[:47] + "..."
-        
     return (
-        f"Gara-gara terinspirasi post viral: \"{first_line}\", gua sadar kalau "
-        f"kunci engagement tinggi itu bukan cuma konsistensi, tapi hook di 3 detik pertama. "
-        f"Kalo kalimat pertama lu ngebosenin, sisa tulisan lu gak bakal dibaca sama sekali. "
-        f"Fokus bikin pembaca ngerasa terhubung dulu baru sharing tipsnya."
+        "Rahasia biar konten lu gak di-skip dalam 3 detik pertama:\n\n"
+        "Fokus ke kalimat pertama (hook) yang langsung nyentuh masalah audiens.\n"
+        "Gak usah bertele-tele, langsung sebutin solusi spesifik yang mereka butuhin."
     )
 
 
@@ -104,11 +99,12 @@ Original viral post:
 \"\"\"
 
 Requirements:
-1. The rewritten post MUST follow the same psychological hook structure/formula as the original post.
+1. The rewritten post MUST follow the same psychological hook structure/formula as the original post, but be rewritten for copywriting/content marketing tips.
 2. The rewritten post MUST be strictly UNDER 480 characters (to fit within the 500-char limit of Threads).
-3. The language/tone MUST be Indonesian, causal/informal (using words like 'gua', 'lu', 'kamu', 'aja', 'kalo', dll. suitable for social media/Threads/X), punchy, and engaging.
-4. The output must NOT contain any placeholders like [X] or [link] or brackets. Fill them in with actual values or delete them.
-5. Output ONLY the rewritten post text. Do not output any explanation or wrapper quotes.
+3. Keep it simple, extremely sharp, and punchy. Avoid verbose introductions or preambles like "Gara-gara terinspirasi post viral ini" or "Saya baru sadar". Get straight to the point.
+4. The language/tone MUST be Indonesian, causal/informal (using words like 'gua', 'lu', 'kamu', 'aja', 'kalo', dll. suitable for social media/Threads/X), punchy, and engaging.
+5. The output must NOT contain any placeholders like [X] or [link] or brackets. Fill them in with actual values or delete them.
+6. Output ONLY the rewritten post text. Do not output any explanation or wrapper quotes.
 """
 
     try:
@@ -169,6 +165,7 @@ def main():
     print(f"Menemukan {len(inputs)} postingan viral untuk diparafrase.")
     next_num = get_next_hook_number()
     
+    import time
     for idx, viral_text in enumerate(inputs, 1):
         print(f"\nProcessing post #{idx}...")
         print(f"Original hook preview: \"{viral_text.splitlines()[0][:60]}...\"")
@@ -189,6 +186,11 @@ def main():
             print("-" * 50)
             append_hook_to_file(generated_hook, next_num)
             next_num += 1
+            
+        # Sleep to respect Gemini Free Tier 5 RPM rate limit
+        if not MOCK_MODE and idx < len(inputs):
+            print("Menunggu 12 detik untuk menjaga batas rate-limit API...")
+            time.sleep(12)
 
 
 if __name__ == "__main__":
