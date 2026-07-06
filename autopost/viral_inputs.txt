@@ -2,23 +2,11 @@
 # Gunakan pembatas '---' (tiga strip) untuk memisahkan antar postingan.
 # Baris yang diawali dengan '#' akan diabaikan oleh skrip.
 
-Aku habisin 14 juta cuma buat sadar 1 hal ini. Kamu gratis.
-Kebanyakan kreator pemula fokus di visual, padahal rahasia konten viral adalah kalimat pertama (hook) yang bikin orang berhenti scrolling.
-Ini 5 pola hook yang bikin orang kepo setengah mati:
----
-Pendapat tidak populer: Konsisten posting sampah tidak akan menyelamatkan akunmu.
-Yang kamu butuh adalah kualitas pembuka yang bikin audiens ngerasa "ini gua banget".
-Berikut cara meremake kalimat pertamamu biar conversion rate naik 200%.
----
-Pernah gak, udah duduk depan laptop 1 jam tapi yang kedengarannya cuma suara jangkrik karena kepala kosong?
-Gak tau mau nulis apa, padahal produk udah siap rilis. Ini framework nulis copywriting 3 langkah yang bikin jari ngetik sendiri.
-
----
 # Source: threads.net/@siauwandreas (Likes: 214, Replies: 13)
 2 Alasan Kenapa Kamu Harus Belajar Copywriting dari Sekarang
 1. Komunikasi
 Seperti yang kita tahu, di media sosial/di internet, kita berkomunikasi lewat tulisan, bukan?
-Kalau komunikasi secara lisan, intonasi dan artikulasi adalah hal yang krusial.
+Kalau komunikasi secara lisan, intonasi & artikulasi adalah hal yang krusial.
 Sementara komunikasi secara tertulis, pemilihan kata & tanda baca adalah hal yang krusial.
 2. Kompetisi
 Kompetisi di sini bukan tentang seberapa banyak kompetitormu, tapi kompetisi untuk mendapatkan ATENSI dari target pasarmu.

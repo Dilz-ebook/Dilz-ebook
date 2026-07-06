@@ -29,8 +29,8 @@ def parse_hook_viral_promo():
     content = filepath.read_text(encoding="utf-8")
     hooks = []
     
-    # Split content by double newlines to isolate each hook block
-    blocks = content.split("\n\n")
+    # Split content by double newlines followed by a digit and a period to isolate hook blocks
+    blocks = re.split(r'\n\n(?=\d+\.\s)', content)
     
     for block in blocks:
         block = block.strip()
