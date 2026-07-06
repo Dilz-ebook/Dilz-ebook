@@ -12,12 +12,3 @@ Di socmed, kan banyak banget info, ya? Kalo ngomong langsung, kita dengerin yang
 Bukan cuma tentang ngasih info, tapi apa yg bisa diambil audience lu? Mereka dapet apa? Konten yg ngasih solusi/ilmu itu yg dicari.
 
 2. Cuma mau ngasih tau kalo ada teknik copywriting underrated yang bikin tulisan lu nyambung banget ke audiens sampai mereka ngerasa lu lagi ngomong sama mereka. 🤭
-
-3. Strategi konten lu hari ini: Tiga jenis hook, 26 cara narik perhatian, dengan inti psikologi audiens yang paling deep. Plus, tiga pola unik yang didesain khusus buat FYP.
-
-4. Views tembus jutaan cuma dari headline 3 kata. Makasih yang udah berani mikir simple & bikin orang penasaran.
-
-5. Rahasia biar konten lu gak di-skip dalam 3 detik pertama:
-
-Fokus ke kalimat pertama (hook) yang langsung nyentuh masalah audiens.
-Gak usah bertele-tele, langsung sebutin solusi spesifik yang mereka butuhin.

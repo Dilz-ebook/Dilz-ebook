@@ -51,61 +51,6 @@ def parse_hook_viral_promo():
     return hooks
 
 
-def parse_caption_promosi():
-    """Parse caption-promosi.md for ready-to-post captions."""
-    filepath = MARKETING_DIR / "caption-promosi.md"
-    if not filepath.exists():
-        return []
-    
-    content = filepath.read_text(encoding="utf-8")
-    captions = []
-    
-    # Extract content between ``` blocks
-    code_blocks = re.findall(r'```\n(.*?)```', content, re.DOTALL)
-    
-    for block in code_blocks:
-        text = block.strip()
-        # Skip blocks that are clearly not captions (like story templates)
-        if text and len(text) > 30 and "[Quote box]" not in text and "[Sticker]" not in text:
-            # Clean up the text - remove hashtags at end if needed
-            captions.append({
-                "text": text,
-                "category": "caption-promosi",
-                "type": "caption",
-            })
-    
-    return captions
-
-
-def parse_thread_teaser_hooks():
-    """
-    Parse thread-teaser.md but only extract the HOOK posts (POST 1)
-    since full threads need to be posted manually.
-    Also extract CTA posts for single use.
-    """
-    filepath = MARKETING_DIR / "thread-teaser.md"
-    if not filepath.exists():
-        return []
-    
-    content = filepath.read_text(encoding="utf-8")
-    hooks = []
-    
-    # Extract code blocks that contain [POST 1 - HOOK]
-    code_blocks = re.findall(r'```\n(.*?)```', content, re.DOTALL)
-    
-    for block in code_blocks:
-        if "[POST 1 - HOOK]" in block:
-            # Extract just the text after the label
-            text = block.replace("[POST 1 - HOOK]", "").strip()
-            if text:
-                hooks.append({
-                    "text": text,
-                    "category": "thread-teaser-hook",
-                    "type": "single_post",
-                })
-    
-    return hooks
-
 
 def inject_link(text):
     """
@@ -169,89 +114,13 @@ def validate_queue(queue):
 
 
 def generate_queue():
-    """Generate the full content queue, mixed for variety."""
+    """Generate the full content queue from organic hooks."""
     print("Parsing marketing files...")
     
     hooks = parse_hook_viral_promo()
     print(f"  organik-viral-hooks.md: {len(hooks)} hooks")
     
-    captions = []
-    teaser_hooks = []
-    
-    # Separate posts with link vs without link (links are not used anymore)
-    all_posts = hooks + captions + teaser_hooks
-    posts_with_link = []
-    posts_without_link = all_posts
-    
-    print(f"  Total organic posts: {len(posts_without_link)}")
-    
-    # Build queue: 3 posts per day
-    # Rule: minimal 1, maksimal 2 link per hari
-    # With 26 link posts and 38 no-link posts = 64 total = ~21 days
-    # 26 links / 21 days = ~1.2 per day → mostly 1, sometimes 2
-    queue = []
-    link_idx = 0
-    no_link_idx = 0
-    day = 0
-    
-    while link_idx < len(posts_with_link) or no_link_idx < len(posts_without_link):
-        day += 1
-        day_posts = []
-        
-        # Calculate: should this day have 1 or 2 links?
-        remaining_links = len(posts_with_link) - link_idx
-        remaining_no_links = len(posts_without_link) - no_link_idx
-        remaining_days = max(1, (remaining_links + remaining_no_links + 2) // 3)
-        
-        # If we have enough links for 2 per day for remaining days, use 2
-        # Otherwise use 1 to spread them out
-        links_today = 2 if remaining_links > remaining_days else 1
-        # But max 2
-        links_today = min(links_today, 2, remaining_links)
-        # Ensure at least 1 if available
-        links_today = max(links_today, min(1, remaining_links))
-        
-        no_links_today = 3 - links_today
-        
-        # Build day: start with no-link, then link in middle/end (more natural)
-        # Pattern: no-link first, then links
-        added_no_link = 0
-        added_link = 0
-        
-        # First slot: no-link (if available)
-        if added_no_link < no_links_today and no_link_idx < len(posts_without_link):
-            day_posts.append(posts_without_link[no_link_idx])
-            no_link_idx += 1
-            added_no_link += 1
-        elif link_idx < len(posts_with_link):
-            day_posts.append(posts_with_link[link_idx])
-            link_idx += 1
-            added_link += 1
-        
-        # Second slot: link (if needed) or no-link
-        if added_link < links_today and link_idx < len(posts_with_link):
-            day_posts.append(posts_with_link[link_idx])
-            link_idx += 1
-            added_link += 1
-        elif no_link_idx < len(posts_without_link):
-            day_posts.append(posts_without_link[no_link_idx])
-            no_link_idx += 1
-            added_no_link += 1
-        
-        # Third slot: fill remaining
-        if added_link < links_today and link_idx < len(posts_with_link):
-            day_posts.append(posts_with_link[link_idx])
-            link_idx += 1
-            added_link += 1
-        elif no_link_idx < len(posts_without_link):
-            day_posts.append(posts_without_link[no_link_idx])
-            no_link_idx += 1
-            added_no_link += 1
-        
-        if not day_posts:
-            break
-        
-        queue.extend(day_posts)
+    queue = hooks
     
     # Inject Lynk.id link and clean up hashtags
     for item in queue:
