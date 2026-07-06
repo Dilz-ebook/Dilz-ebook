@@ -236,7 +236,7 @@ Jualan organik di Threads/IG = jualan tanpa keliatan jualan.
 
 Caranya? Pakai hook "Selling Trigger" yang aku susun di ebook.
 
-13 template selling trigger + 230+ hook lain untuk warming up audiens kamu.
+14 template selling trigger + 240+ hook lain untuk warming up audiens kamu.
 
 Rp 25.000. [link]
 ```

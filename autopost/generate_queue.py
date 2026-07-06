@@ -19,13 +19,10 @@ MARKETING_DIR = Path(__file__).parent.parent / "marketing"
 OUTPUT_FILE = Path(__file__).parent / "content_queue.json"
 X_EXPORT_FILE = Path(__file__).parent / "x_export.txt"
 
-# Link produk Lynk.id
-LYNKID_URL = "https://lynk.id/pinokioarab/mjz191d8871v"
-
 
 def parse_hook_viral_promo():
-    """Parse hook-viral-promo.md for single-post hooks."""
-    filepath = MARKETING_DIR / "hook-viral-promo.md"
+    """Parse organik-viral-hooks.md for single-post hooks."""
+    filepath = MARKETING_DIR / "organik-viral-hooks.md"
     if not filepath.exists():
         return []
     
@@ -41,7 +38,7 @@ def parse_hook_viral_promo():
         if text and len(text) > 20 and not text.startswith("|") and not text.startswith("Hook"):
             hooks.append({
                 "text": text,
-                "category": "hook-viral-promo",
+                "category": "organik-viral-hook",
                 "type": "single_post",
             })
     
@@ -106,37 +103,8 @@ def parse_thread_teaser_hooks():
 
 def inject_link(text):
     """
-    Replace all [link] placeholders and 'link/cek/klik di bio' mentions
-    with the actual Lynk.id product URL.
+    Clean up double newlines, trailing spaces, and leading spaces on lines.
     """
-    # Replace [link] placeholder
-    text = text.replace("[link]", LYNKID_URL)
-    
-    # Replace variations of "link di bio", "cek bio", "klik di bio" etc.
-    # Match full phrases including trailing punctuation/words
-    bio_replacements = [
-        (r'Klik di bio buat checkout\.?', f'Grab di sini: {LYNKID_URL}'),
-        (r'Klik di bio kalo siap\.?', f'Grab di sini: {LYNKID_URL}'),
-        (r'Klik di bio sebelum kelewat\.?', f'Grab sekarang: {LYNKID_URL}'),
-        (r'Klik di bio\.?', f'Grab di sini: {LYNKID_URL}'),
-        (r'Cek bio sekarang\.?', f'Grab: {LYNKID_URL}'),
-        (r'Cek bio kalo penasaran\.?', f'Cek di sini: {LYNKID_URL}'),
-        (r'Cek bio\.?', f'Cek: {LYNKID_URL}'),
-        (r'Link di bio\.?', LYNKID_URL),
-        (r'link di bio\.?', LYNKID_URL),
-    ]
-    
-    # Only inject bio link if post doesn't already contain the URL
-    if LYNKID_URL not in text:
-        for pattern, replacement in bio_replacements:
-            if re.search(pattern, text):
-                text = re.sub(pattern, replacement, text)
-                break  # Only replace first match to avoid duplicates
-    else:
-        # URL already present from [link] replacement, just remove leftover "bio" refs
-        for pattern, _ in bio_replacements:
-            text = re.sub(pattern, '', text)
-    
     # Clean up double newlines, trailing spaces, leading spaces on lines
     text = re.sub(r' +\n', '\n', text)
     text = re.sub(r'\n +', '\n', text)
@@ -146,51 +114,150 @@ def inject_link(text):
     return text
 
 
+def validate_queue(queue):
+    """
+    Validate all posts in the queue.
+    Checks for:
+    1. Characters exceeding 500 limit (Threads).
+    2. Leftover placeholders like [X] or unreplaced brackets.
+    """
+    errors = []
+    
+    # Whitelist of brackets that are allowed (e.g. formula explanations)
+    allowed_brackets = {
+        "Trigger emosi",
+        "Spesifik/Angka",
+        "Janji/Penasaran",
+    }
+    
+    for i, item in enumerate(queue, 1):
+        text = item["text"]
+        category = item["category"]
+        
+        # 1. Length check
+        if len(text) > 500:
+            errors.append(
+                f"POST #{i} ({category}) MELEBIHI batas 500 karakter Threads ({len(text)} karakter).\n"
+                f"Teks: \"{text[:60]}...\""
+            )
+            
+        # 2. Placeholder check
+        # Match anything inside square brackets
+        brackets = re.findall(r'\[([^\]]+)\]', text)
+        for b in brackets:
+            if b not in allowed_brackets:
+                errors.append(
+                    f"POST #{i} ({category}) MENGANDUNG PLACEHOLDER: [{b}].\n"
+                    f"Teks: \"{text[:60]}...\""
+                )
+            
+    if errors:
+        print("\n❌ ERROR VALIDASI: Ditemukan kesalahan pada konten marketing!")
+        for e in errors:
+            print(f"   - {e}")
+        print("\nAntrean konten TIDAK akan diperbarui karena kegagalan validasi. Silakan perbaiki file di folder marketing/ terlebih dahulu.")
+        import sys
+        sys.exit(1)
+        
+    print("\n✅ Semua konten berhasil melewati validasi kualitas (Karakter & Placeholder aman).")
+
+
 def generate_queue():
     """Generate the full content queue, mixed for variety."""
     print("Parsing marketing files...")
-    print(f"  Lynk.id URL: {LYNKID_URL}")
     
     hooks = parse_hook_viral_promo()
-    print(f"  hook-viral-promo.md: {len(hooks)} hooks")
+    print(f"  organik-viral-hooks.md: {len(hooks)} hooks")
     
-    captions = parse_caption_promosi()
-    print(f"  caption-promosi.md: {len(captions)} captions")
+    captions = []
+    teaser_hooks = []
     
-    teaser_hooks = parse_thread_teaser_hooks()
-    print(f"  thread-teaser.md: {len(teaser_hooks)} teaser hooks")
+    # Separate posts with link vs without link (links are not used anymore)
+    all_posts = hooks + captions + teaser_hooks
+    posts_with_link = []
+    posts_without_link = all_posts
     
-    # Build queue: alternate between types for variety
-    # Strategy: caption → hook → caption → hook → teaser → repeat
+    print(f"  Total organic posts: {len(posts_without_link)}")
+    
+    # Build queue: 3 posts per day
+    # Rule: minimal 1, maksimal 2 link per hari
+    # With 26 link posts and 38 no-link posts = 64 total = ~21 days
+    # 26 links / 21 days = ~1.2 per day → mostly 1, sometimes 2
     queue = []
-    h_idx, c_idx, t_idx = 0, 0, 0
+    link_idx = 0
+    no_link_idx = 0
+    day = 0
     
-    while h_idx < len(hooks) or c_idx < len(captions) or t_idx < len(teaser_hooks):
-        # Add a caption
-        if c_idx < len(captions):
-            queue.append(captions[c_idx])
-            c_idx += 1
+    while link_idx < len(posts_with_link) or no_link_idx < len(posts_without_link):
+        day += 1
+        day_posts = []
         
-        # Add a hook
-        if h_idx < len(hooks):
-            queue.append(hooks[h_idx])
-            h_idx += 1
+        # Calculate: should this day have 1 or 2 links?
+        remaining_links = len(posts_with_link) - link_idx
+        remaining_no_links = len(posts_without_link) - no_link_idx
+        remaining_days = max(1, (remaining_links + remaining_no_links + 2) // 3)
         
-        # Add a teaser hook every 5 items
-        if t_idx < len(teaser_hooks) and len(queue) % 5 == 0:
-            queue.append(teaser_hooks[t_idx])
-            t_idx += 1
+        # If we have enough links for 2 per day for remaining days, use 2
+        # Otherwise use 1 to spread them out
+        links_today = 2 if remaining_links > remaining_days else 1
+        # But max 2
+        links_today = min(links_today, 2, remaining_links)
+        # Ensure at least 1 if available
+        links_today = max(links_today, min(1, remaining_links))
+        
+        no_links_today = 3 - links_today
+        
+        # Build day: start with no-link, then link in middle/end (more natural)
+        # Pattern: no-link first, then links
+        added_no_link = 0
+        added_link = 0
+        
+        # First slot: no-link (if available)
+        if added_no_link < no_links_today and no_link_idx < len(posts_without_link):
+            day_posts.append(posts_without_link[no_link_idx])
+            no_link_idx += 1
+            added_no_link += 1
+        elif link_idx < len(posts_with_link):
+            day_posts.append(posts_with_link[link_idx])
+            link_idx += 1
+            added_link += 1
+        
+        # Second slot: link (if needed) or no-link
+        if added_link < links_today and link_idx < len(posts_with_link):
+            day_posts.append(posts_with_link[link_idx])
+            link_idx += 1
+            added_link += 1
+        elif no_link_idx < len(posts_without_link):
+            day_posts.append(posts_without_link[no_link_idx])
+            no_link_idx += 1
+            added_no_link += 1
+        
+        # Third slot: fill remaining
+        if added_link < links_today and link_idx < len(posts_with_link):
+            day_posts.append(posts_with_link[link_idx])
+            link_idx += 1
+            added_link += 1
+        elif no_link_idx < len(posts_without_link):
+            day_posts.append(posts_without_link[no_link_idx])
+            no_link_idx += 1
+            added_no_link += 1
+        
+        if not day_posts:
+            break
+        
+        queue.extend(day_posts)
     
-    # Add remaining teaser hooks
-    while t_idx < len(teaser_hooks):
-        queue.append(teaser_hooks[t_idx])
-        t_idx += 1
-    
-    # Inject Lynk.id link into all posts
+    # Inject Lynk.id link and clean up hashtags
     for item in queue:
         item["text"] = inject_link(item["text"])
+        # Remove #PinokioArab (Threads treats it as group tag)
+        item["text"] = re.sub(r'\n*#PinokioArab\n*', '', item["text"], flags=re.IGNORECASE)
+        item["text"] = item["text"].strip()
     
     print(f"\nTotal queue: {len(queue)} posts")
+    
+    # Run validation before saving
+    validate_queue(queue)
     
     # Save JSON queue
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
