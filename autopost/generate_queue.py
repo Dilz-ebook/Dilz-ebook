@@ -28,15 +28,38 @@ def parse_hook_viral_promo():
     
     content = filepath.read_text(encoding="utf-8")
     hooks = []
+    current_index = 1
+    positions = []
     
-    # Split content by double newlines followed by a digit and a period to isolate hook blocks
-    blocks = re.split(r'\n\n(?=\d+\.\s)', content)
+    # Clean/normalize content newlines
+    content = content.replace('\r\n', '\n')
     
-    for block in blocks:
-        block = block.strip()
-        if not block:
-            continue
+    # Find the start of each hook sequentially
+    while True:
+        if current_index == 1:
+            # Try to find "1. " either at the start of string or after a newline
+            pattern = r'(?:^|\n)(1\.\s)'
+            match = re.search(pattern, content)
+        else:
+            pattern = f'\n\n({current_index}\\.\\s)'
+            match = re.search(pattern, content)
             
+        if not match:
+            break
+            
+        positions.append((current_index, match.start(1)))
+        current_index += 1
+        
+    # Extract the texts between positions
+    for i in range(len(positions)):
+        idx, start_pos = positions[i]
+        if i + 1 < len(positions):
+            end_pos = positions[i+1][1] - 2  # Exclude leading \n\n of next hook
+        else:
+            end_pos = len(content)
+            
+        block = content[start_pos:end_pos].strip()
+        
         # Match starting with number like "1. " or "12. "
         match = re.match(r'^\d+\.\s+(.+)$', block, re.DOTALL)
         if match:

@@ -65,6 +65,14 @@ def get_next_hook_number():
     return max(numbers) + 1 if numbers else 1
 
 
+def clean_original_text(text):
+    """Clean the original text (e.g. remove trailing 'Translate' and truncate to 500 chars)."""
+    text = re.sub(r'(?i)\n*translate\s*$', '', text).strip()
+    if len(text) > 500:
+        text = text[:497] + "..."
+    return text
+
+
 def mock_paraphrase(viral_text, index):
     """Simulate an organic copywriting tip hook for offline testing."""
     return (
@@ -77,7 +85,8 @@ def mock_paraphrase(viral_text, index):
 def generate_paraphrase(viral_text, index):
     """Call Google Gemini API to paraphrase the post into organic content."""
     if MOCK_MODE:
-        return mock_paraphrase(viral_text, index)
+        print("MOCK_MODE aktif (tanpa API key). Menggunakan teks asli.")
+        return clean_original_text(viral_text)
         
     import google.generativeai as genai
     genai.configure(api_key=GEMINI_API_KEY)
@@ -115,8 +124,9 @@ Requirements:
             text = text[1:-1].strip()
         return text
     except Exception as e:
-        print(f"Error calling Gemini API: {e}. Falling back to Mock Mode.")
-        return mock_paraphrase(viral_text, index)
+        print(f"Error calling Gemini API (Kemungkinan kuota habis): {e}")
+        print("Menggunakan teks asli tanpa paraphrase sebagai fallback.")
+        return clean_original_text(viral_text)
 
 
 def validate_hook(text, original_num):
