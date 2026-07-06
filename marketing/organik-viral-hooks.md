@@ -12,3 +12,12 @@ Di socmed, kan banyak banget info, ya? Kalo ngomong langsung, kita dengerin yang
 Bukan cuma tentang ngasih info, tapi apa yg bisa diambil audience lu? Mereka dapet apa? Konten yg ngasih solusi/ilmu itu yg dicari.
 
 2. Cuma mau ngasih tau kalo ada teknik copywriting underrated yang bikin tulisan lu nyambung banget ke audiens sampai mereka ngerasa lu lagi ngomong sama mereka. 🤭
+
+3. 2 Alasan Kenapa Konten Lu Harus Pakai Kalimat Pendek
+1. Paham
+Kalo ngobrol, intonasi penting biar nyampe, kan? Nah, di tulisan, kalimat pendek bikin ide lu gampang dicerna, otak audiens santuy bacanya.
+2. Rebut Atensi
+"Rebut Atensi" di sini bukan cuma soal lawan kompetitor, tapi gimana caranya pesan lu langsung NYANTOL di benak audiens cuma dalam sekian detik.
+
+Gimana, setuju?
+

@@ -16,6 +16,7 @@ from pathlib import Path
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import TimeoutException
 
 # Paths
 CONFIG_FILE = Path(__file__).parent / "competitors.json"
@@ -88,8 +89,12 @@ def scrape_profile(driver, username, config, existing_normalized_posts):
     print(f"Mengunjungi profil: {url} ...")
     
     try:
-        driver.get(url)
-        time.sleep(6) # Wait for page load
+        try:
+            driver.get(url)
+        except TimeoutException:
+            print(f"  ⚠️ Timeout saat memuat halaman {url}, mencoba memproses DOM yang ada...")
+            
+        time.sleep(3) # Wait slightly for DOM to settle
         
         # Scroll down slightly to trigger loading more posts if needed
         driver.execute_script("window.scrollTo(0, 600);")
@@ -189,6 +194,7 @@ def main():
     
     # Setup Chrome options
     options = Options()
+    options.page_load_strategy = 'eager'
     options.add_argument('--headless')
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
@@ -196,6 +202,7 @@ def main():
     options.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36')
     
     driver = webdriver.Chrome(options=options)
+    driver.set_page_load_timeout(20)
     all_new_posts = []
     
     try:
