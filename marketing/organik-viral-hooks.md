@@ -83,3 +83,63 @@ What you'll be doing:
 
 17. Looking for Event / Content videographer for a job end of April.
 Do share me your portfolio and rate! Thanks
+
+18. 2 Hal Krusial Biar Konten Kamu Auto Dilirik
+
+1.  Kejelasan. Kalo ngobrol langsung lu muter-muter, orang males dengerin. Sama kayak konten, kalo bahasanya ribet, pasti diskip. Bikin simpel, to the point.
+2.  Relevansi. Kompetisi konten itu bukan soal banyaknya postingan, tapi gimana lu bisa relate & kasih solusi. Pahami audiensmu.
+
+Gimana menurutmu?
+
+19. Cuma mau ngasih tau ada trik nulis konten underrated yang bikin audiens lu betah. Gini, daripada sibuk ngejar viral, fokus aja nyelesaiin satu masalah kecil mereka tiap hari. Kalo lu konsisten ngasih solusi, mereka pasti nempel terus. 🤭
+
+20. 2 Rahasia Konten Kamu Dilirik!
+1. Opening Hook:
+Di timeline yang padat, kamu cuma punya 3 detik narik perhatian. Mulai pake kalimat kuat yang bikin penasaran.
+2. Benefit Focus:
+Orang scroll buat cari solusi/hiburan. Kasih tau langsung apa untungnya baca postinganmu.
+Gimana menurut lu?
+
+21. Kalo menurutmu, apa sih yang bikin konten/postingan itu rame? 👇 Komen "RAHASIA" biar gua bantu kamu bongkar cara bikin headline/hook yang bikin orang auto stop scroll & baca postinganmu sampe habis! ✨ Share/Tag temenmu yang lagi pusing cari ide konten & biar postingannya nyantol juga! 🔥
+
+22. Semoga siapa pun yg baca ini, lu selalu bisa bikin konten yg pesannya jelas, gampang banget nyentuh audiens, & auto bikin mereka gerak. Yoi kan?
+
+23. Kayanya copy yang jujur & personal sekarang lebih ngena dibanding yang cuma pamer fitur doang. Lu ngerasa gitu juga gak?
+
+24. Bahwa lu punya ide keren bukan berarti lu punya cara nyampein yg bikin orang ngeh.
+So?
+Simple, pinjem aja struktur post viral yg relate ke ide lu.
+Catatan: rendahin ego lu pas nyontek ya.....
+
+25. Konten gua meledak viral gak pernah masuk planning. Padahal udah mikir keras, bikin copy rapi, tapi sepi aja. Rasanya buntu banget. Kuncinya bukan di teknik ribet, tapi ngertiin apa yang audiens rasain. Kalo lu ngerasa buntu juga, mungkin ini pencerah buat kontenmu.
+
+26. Postingan biar banyak jualan ❌
+Postingan biar bangun trust & koneksi ✅
+
+27. Ada yang jago banget bikin hook copywriting yang auto bikin orang stop scroll di sosmed? Atau lu punya formula kalimat pembuka yang anti-skip? Makasih banyak ya sebelumnya 🙏
+
+28. Resmi! Algoritma medsos netapin konten yg bikin orang stop scroll di 3 detik awal itu wajib. Kalo nggak, ya auto lewat. Gimana pendapat kamu?
+
+29. Trik Ngembangin Ide Konten Anti Buntu++
+Buat feeds IG, thread X, ato ide video TikTok, bisa banget.
+Step-by-stepnya, gua kasih tau.
+Lihat sekeliling lu, jadikan tiap obrolan ato kejadian jadi ide konten unik.
+
+30. Mau kontenmu nyentuh hati & bikin audience relate? Sering buntu cari topik yang pas?
+
+🔹Riset Forum Online (Reddit/Quora/Kaskus): Cari pertanyaan & keluhan mereka. Dapet insight mendalam.
+🔹Komentar Medsos Pesaing/Besar: Intip apa yang mereka bahas & keluhkan di sana. Ide fresh & real-time.
+
+Pasti ide konten lu makin tajam!
+
+31. Lagi nyari konten yang langsung bikin orang stop scrolling? Kasih tahu *persis* apa masalah mereka, terus *langsung tawarin* solusinya yang *konkret*! Pasti nampol. Cobain!
+
+32. Dulu gua mikir, copy nampol itu harus pakai diksi berat. Ternyata salah. Yang paling nampol itu kalo lu bikin pembaca *ngerasain* sesuatu.
+
+33. Gua resmi ngumumin!
+Threads Award ke-♾️ buat Konten Paling Jelas Sedunia.
+Kompetisinya dimulai sekarang.
+Juaranya?
+Ini caranya: LANGSUNG NGOMONG INTINYA.
+
+34. Gua tau konten kamu bisa nyentuh banget 😌 Suka banget pas kamu bisa ngulik *pain point* audiens mereka 😍
