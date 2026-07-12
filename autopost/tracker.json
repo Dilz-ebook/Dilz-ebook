@@ -1,5 +1,5 @@
 {
-  "threads_index": 17,
+  "threads_index": 1,
   "x_index": 0,
   "posted": [
     {
@@ -1247,6 +1247,13 @@
       "post_id": "18107683060799035",
       "category": "organik-viral-hook",
       "timestamp": "2026-07-11 12:59:54 UTC"
+    },
+    {
+      "platform": "threads",
+      "index": 0,
+      "post_id": "18023236361681790",
+      "category": "organik-viral-hook",
+      "timestamp": "2026-07-12 02:08:32 UTC"
     }
   ]
 }
