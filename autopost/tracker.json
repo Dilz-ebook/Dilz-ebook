@@ -1,5 +1,5 @@
 {
-  "threads_index": 1,
+  "threads_index": 2,
   "x_index": 0,
   "posted": [
     {
@@ -2465,6 +2465,13 @@
         "quotes": 0,
         "last_updated": "2026-07-12 02:29:30 UTC"
       }
+    },
+    {
+      "platform": "threads",
+      "index": 1,
+      "post_id": "17993400917795960",
+      "category": "organik-viral-hook",
+      "timestamp": "2026-07-12 07:25:40 UTC"
     }
   ]
 }
