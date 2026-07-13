@@ -7,14 +7,14 @@ Requires a one-time login:
 
 Cron mode (no flag) reuses the logged-in profile headless-ish (non-headless
 under Xvfb to dodge anti-bot detection), scrolls the feed, filters posts by
-likes threshold, appends viral ones to viral_inputs.txt.
+likes threshold + Indonesian language, appends viral ones directly as hooks
+(copas, no Gemini paraphrase) to marketing/organik-viral-hooks.md.
 
 Usage:
     python3 autopost/scrape_threads_feed.py            # scrape feed
     python3 autopost/scrape_threads_feed.py --login    # interactive login
 
-Reuses read_existing_inputs / parse_metric_value / append_to_inputs_file /
-load_config from scrape_threads_competitors.py.
+Reuses parse_metric_value / load_config from scrape_threads_competitors.py.
 """
 
 import argparse
@@ -30,13 +30,12 @@ from selenium.common.exceptions import TimeoutException
 
 # Reuse generic helpers from the profile scraper
 sys.path.insert(0, str(Path(__file__).parent))
-from scrape_threads_competitors import (  # noqa: E402
-    read_existing_inputs, parse_metric_value, append_to_inputs_file, load_config,
-)
+from scrape_threads_competitors import parse_metric_value, load_config  # noqa: E402
 
 # Paths
 PROFILE_DIR = Path(__file__).parent / ".chrome-profile"
 FEED_URL = "https://www.threads.net/"
+HOOK_FILE = Path(__file__).parent.parent / "marketing" / "organik-viral-hooks.md"
 
 # ponytail: selectors are Threads feed DOM classes, obfuscated & change per deploy.
 # Verify live via DevTools on first --login run; fallback to structural role=article.
@@ -54,6 +53,41 @@ METRIC_SELECTORS = [
     ".x4vbgl9.x1qfufaz.x1k70j0n",
     'div[role="button"]',
 ]
+
+
+def read_existing_hooks():
+    """Read normalized text of existing hooks in organik-viral-hooks.md for dedup."""
+    if not HOOK_FILE.exists():
+        return set()
+    content = HOOK_FILE.read_text(encoding="utf-8")
+    existing = set()
+    for m in re.finditer(r'^\d+\.\s+(.+)$', content, re.MULTILINE | re.DOTALL):
+        text = m.group(1).strip()
+        if text:
+            existing.add(re.sub(r'\s+', '', text).lower())
+    return existing
+
+
+def get_next_hook_number():
+    """Next sequential hook number in organik-viral-hooks.md."""
+    if not HOOK_FILE.exists():
+        return 1
+    content = HOOK_FILE.read_text(encoding="utf-8")
+    numbers = [int(n) for n in re.findall(r'^(\d+)\.\s+', content, re.MULTILINE)]
+    return max(numbers) + 1 if numbers else 1
+
+
+def append_hooks_to_file(posts):
+    """Append scraped posts directly as hooks (copas, no paraphrase)."""
+    if not posts:
+        return
+    HOOK_FILE.parent.mkdir(parents=True, exist_ok=True)
+    next_num = get_next_hook_number()
+    with open(HOOK_FILE, "a", encoding="utf-8") as f:
+        for p in posts:
+            f.write(f"\n\n{next_num}. {p['text']}\n")
+            next_num += 1
+    print(f"✅ {len(posts)} hook copas ditambahkan ke {HOOK_FILE.name}")
 
 
 def find_first(parent, selectors, by=By.CSS_SELECTOR):
@@ -280,8 +314,8 @@ def main():
         print("   Jalankan dulu: DISPLAY=:10.0 python3 autopost/scrape_threads_feed.py --login")
         sys.exit(1)
 
-    existing = read_existing_inputs()
-    print(f"  {len(existing)} post unik sudah ada di viral_inputs.txt.\n")
+    existing = read_existing_hooks()
+    print(f"  {len(existing)} hook unik sudah ada di {HOOK_FILE.name}.\n")
 
     driver = make_driver(headless=False)
     try:
@@ -295,8 +329,7 @@ def main():
             print("Tidak ada post viral baru di feed.")
             sys.exit(0)
 
-        append_to_inputs_file(new_posts)
-        print(f"\n✅ {len(new_posts)} post viral feed ditambahkan ke viral_inputs.txt")
+        append_hooks_to_file(new_posts)
     finally:
         driver.quit()
 
