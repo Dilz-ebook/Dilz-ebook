@@ -160,6 +160,11 @@ def is_indonesian(text):
     if letters and latin / letters < 0.7:
         return False
     low = text.lower()
+    # ponytail: topic blocklist — skip sensitive/unwanted themes.
+    # Add keywords here as new unwanted topics surface.
+    blocklist = ["lgbt", "gay", "lesbian", "queer", "transgender", "trans "]
+    if any(kw in low for kw in blocklist):
+        return False
     # Strong Indonesian / informal-ID markers
     id_markers = [
         " gua", " gue", " lu", " lo ", " kamu", " kita", " aja", " kalo", " kalau",

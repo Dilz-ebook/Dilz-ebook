@@ -10,10 +10,8 @@
 
 6. Ada dokter Ortopedi sub-spesialis lutut di Threads?
 
-7. Ini serem sih. Jujur orang-orang bisa sebenci itu sama lgbtQ kenapa? Kenapa yang gak ngerugiin kalian justru kalian sebenci ituuu?
+7. Aku mengkritik JOKOWI, kenapa TERMUL kepanasan? Jalan tol yg kalian maksud dibangun dengan uang negara, bukan uang pribadi JOKOWI. Ngapain kalian bela yang BAHKAN uda lengser pun masih digaji dari PAJAK RAKYAT?
 
-8. Aku mengkritik JOKOWI, kenapa TERMUL kepanasan? Jalan tol yg kalian maksud dibangun dengan uang negara, bukan uang pribadi JOKOWI. Ngapain kalian bela yang BAHKAN uda lengser pun masih digaji dari PAJAK RAKYAT?
+8. Padahal kucing ini bukan gembul, tapi bulunya tebal karena harus menahan hawa udara yang dingin
 
-9. Padahal kucing ini bukan gembul, tapi bulunya tebal karena harus menahan hawa udara yang dingin
-
-10. Gila… ternyata begini ya main padel level pro di internasional. Keren banget Social Padel House bisa adain match kayak gini.
+9. Gila… ternyata begini ya main padel level pro di internasional. Keren banget Social Padel House bisa adain match kayak gini.
