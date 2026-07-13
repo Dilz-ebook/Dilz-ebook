@@ -15,3 +15,21 @@
 8. Padahal kucing ini bukan gembul, tapi bulunya tebal karena harus menahan hawa udara yang dingin
 
 9. Gila… ternyata begini ya main padel level pro di internasional. Keren banget Social Padel House bisa adain match kayak gini.
+
+
+10. Banyak "AI SaaS" itu sebenarnya bukan bikin model AI sendiri. Mereka cuma membungkus DeepSeek sebut aja contoh AI Kontrak, AI Legal, AI HR, dll., lalu dijual sebagai produk premium. Karena biayanya memang relatif murah dan cepat untuk diimplementasikan 😁 Dan itu sebenarnya tidak masalah. Yang penting transparan. Contohnya di screenshot ini, provider dan model yang digunakan ditampilkan secara terbuka kepada pengguna.  
+Translate
+ 1
+/
+2
+
+
+11. warga to warga
+freelancer to freelancer
+ini namanya freelance buzzer sosmed ya, kerjaannya cuma disuruh like komen aja tapi dibayar. ya walaupun receh lumayan kan buat jajan? 😁😁 
+1
+/
+2
+
+
+12. "Anis mah cuman bisa ngomong doang, gak bisa kerja"
