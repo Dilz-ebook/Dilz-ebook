@@ -32,5 +32,8 @@
     "marketingexamples"
   ],
   "viral_threshold_likes": 50,
-  "max_posts_per_creator": 3
+  "max_posts_per_creator": 3,
+  "feed_threshold_likes": 100,
+  "feed_max_posts": 5,
+  "feed_scroll_limit": 15
 }

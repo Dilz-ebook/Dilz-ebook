@@ -4,3 +4,6 @@ __pycache__/
 .tempmediaStorage/
 *test_*.py
 raw_zuck.html
+autopost/venv/
+autopost/.chrome-profile/
+autopost/pipeline.log
