@@ -33,3 +33,6 @@ ini namanya freelance buzzer sosmed ya, kerjaannya cuma disuruh like komen aja t
 
 
 12. "Anis mah cuman bisa ngomong doang, gak bisa kerja"
+
+
+13. tailscale SSH enak banget buat ngatur distributed AI agents. selama ini remote desktop...
